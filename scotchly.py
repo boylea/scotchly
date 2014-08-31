@@ -1,19 +1,27 @@
-import scipy.io
+import csv
+
 from flask import Flask, request, render_template
 
 # configuration
 DEBUG = True
-# The data file contains a correlation matrix of 87 different whiskies, 
-# and a list of corresponding distillery names. The matrix
-# is symmetric, with each entry i,j == j,i and represents a measure of
-# similarity between the two samples.
-DATA = scipy.io.loadmat('whisky.mat')
-# string array imports from matlab nests the strings in layers of arrays
-DATA['whiskynames'] = [str(x[0][0]) for x in DATA['whiskynames']]
 
 # create our little application
 app = Flask(__name__)
 app.config.from_object(__name__)
+
+def init_data():
+    # The data file contains a correlation matrix of 87 different whiskies, 
+    # and a list of corresponding distillery names. The matrix
+    # is symmetric, with each entry i,j == j,i and represents a measure of
+    # similarity between the two samples.
+    with app.open_resource('whisky.csv') as f:
+        reader = csv.reader(f)
+        # first row is whisky distillery names
+        names = reader.next()
+        scores = []
+        for row in reader:
+            scores.append(row)
+    app.config['DATA'] = {'whiskynames': names, 'whiskypcc': scores}
 
 @app.route('/', methods=['GET', 'POST'])
 def show_whisky():
@@ -36,4 +44,5 @@ def show_whisky():
         return render_template('main.html', names=names, selected=names[0])
 
 if __name__ == '__main__':
+    init_data()
     app.run()
