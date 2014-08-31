@@ -1,0 +1,6 @@
+body { font-family: sans-serif; background: #E6EBF5; }
+footer { text-align: center; }
+
+.centered { text-align: center; }
+.page { margin: 2em auto; width: 35em; border: 5px solid #ccc;
+        padding: 0.8em; background: #F5F7FB; }

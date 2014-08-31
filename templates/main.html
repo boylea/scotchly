@@ -1,0 +1,26 @@
+<!doctype html>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+<body>
+    <div class=page>
+        <div class=centered>
+            <title>Scotchly</title>
+            <h1>Scotchy Scotch Scotch</h1>
+            Select your favorite whisky from the list to get suggestions of others to try
+            <form action="{{ url_for('show_whisky') }}" method=post>
+                <select name=whisky>
+                {% for name in names %}
+                    <option value="{{ name }}">{{ name }}</option>
+                {% endfor %}
+                <option selected="selected">{{ selected }}</option>
+                </select>
+                <input type=submit value=Suggest>
+            </form>
+        </div>
+        {% block suggestions %}{% endblock %}
+    </div>
+</body>
+<footer>
+    <div class=text-center>
+        Powered by data from <a href="https://www.mathstat.strath.ac.uk/outreach/nessie/nessie_whisky.html">The University of Strathclyde</a>
+    </div>
+</footer>

@@ -1,0 +1,10 @@
+{% extends "main.html" %}
+{% block suggestions %}
+  <p>
+    <ul>
+    {% for name in suggestions %}
+        <li>{{ name }}</li>
+    {% endfor %}
+    </ul>
+  </p>
+{% endblock %}
