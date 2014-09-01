@@ -7,4 +7,5 @@ To see this working locally, simply clone the repo and run the command:
 
 `python scotchly.py`
 
-If you have the requirements installed you should see the app at http://localhost:5000/.
+If you have the requirements installed you should see the app at http://0.0.0.0:5000/.
+
