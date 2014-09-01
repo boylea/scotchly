@@ -1,9 +1,10 @@
+import os
 import csv
 
 from flask import Flask, request, render_template
 
 # configuration
-DEBUG = True
+DEBUG = False
 
 # create our little application
 app = Flask(__name__)
@@ -44,5 +45,6 @@ def show_whisky():
         return render_template('main.html', names=names, selected=names[0])
 
 if __name__ == '__main__':
+    port = int(os.environ.get("PORT", 5000))
     init_data()
-    app.run()
+    app.run(host='0.0.0.0', port=port)
